@@ -31,21 +31,9 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val, index) => {
             <span>{val.label}</span>
         </RouteLink>
     </Menu.Item>
-    return permission.showCom(
-        val.permissionType,
-        <Menu.Item key={index} className={isSelected ? styles.active : ""}>
-
-            <RouteLink to={linkTo} target={target}>
-                {val.icon ? <DoAppIcon {...val.icon} className={styles.icon}/> : null}
-                <span>{val.label}</span>
-            </RouteLink>
-
-        </Menu.Item>
-    )
 });
 
 const MenuLeft = ({leftMenu, currentUrl, updateCollapsed}) => {
-    //配置中取是否显示DOSM的LOGO,用于区分是否嵌入DOCP
     const { isEmbedDOCP } = EnumEnv;
     return (
         <LayoutCtx.Consumer>
@@ -76,11 +64,6 @@ const MenuLeft = ({leftMenu, currentUrl, updateCollapsed}) => {
                         <Menu>
                             {formatLeftMenu(leftMenu, currentUrl)}
                         </Menu>
-                        {/* <div className={styles['version']}>
-                            <div className={styles['version-text']}>
-                                {`v ${packages.version}`}
-                            </div>
-                        </div> */}
                     </Layout.Sider>
                 );
             }}

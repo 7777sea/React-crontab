@@ -6,12 +6,6 @@ import { loginSSOByTicket } from '@/services/auth';
 // 通过ticket登录sso
 const loginByTicket = (ticket) => {
     window.location.href = EnumEnv.login.defaultRedirectUrl;
-    // loginSSOByTicket(ticket).then((resp) => {
-    //     //console.log(resp);
-    //     window.location.href = EnumEnv.login.defaultRedirectUrl;
-    // }, (resp) => {
-    //     window.location.href = EnumEnv.login.loginUrl;
-    // });
 };
 
 const runApp = () => {
