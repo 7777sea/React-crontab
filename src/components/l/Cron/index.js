@@ -9,18 +9,17 @@ const { Option } = Select;
 const { TabPane } = Tabs;
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
-const options = [];
-const hourOptions = [];
-const daysForMonOptions = [];
-const monthOptions = [];
+const options = [];   //存储分钟数
+const hourOptions = [];   //存储小时数
+const daysForMonOptions = [];  //存储月天
+const monthOptions = [];    //存储月份
 const weekOptions = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 for (let i = 0; i < 60; i++) { options.push(i.toString()); }
 for (let i = 0; i < 24; i++) { hourOptions.push(i.toString()); }
 for (let i = 1; i < 32; i++) { daysForMonOptions.push(i.toString()); }
 for (let i = 1; i < 13; i++) { monthOptions.push(i.toString()); }
-// for (let i = 1; i < 8; i++) { weekOptions.push(i.toString()); }
 
-class CRON extends React.Component {
+class Cron extends React.Component {
   constructor(props) {
     super(props);
     const { value , type = ['minute', 'hour', 'day', 'month'] } = props;
@@ -36,25 +35,25 @@ class CRON extends React.Component {
     }
 
     // 秒
-    // const second = cronArr[0];
-    // let secondCycleStart = 1;
-    // let secondCycleEnd = 1;
-    // let secondStart = 1;
-    // let secondEvery = 1;
-    // let secondChecked = '0';
-    // let SecondRadiochecked = 1;
-    // if (second === '*') {
-    //   SecondRadiochecked = 1;
-    // } else if (second.indexOf('-') > -1) {
-    //   SecondRadiochecked = 2;
-    //   [secondCycleStart, secondCycleEnd] = second.split('-');
-    // } else if (second.indexOf('/') > -1) {
-    //   SecondRadiochecked = 3;
-    //   [secondStart, secondEvery] = second.split('/');
-    // } else {
-    //   SecondRadiochecked = 4;
-    //   secondChecked = second;
-    // }
+    const second = cronArr[0];
+    let secondCycleStart = 1;
+    let secondCycleEnd = 1;
+    let secondStart = 1;
+    let secondEvery = 1;
+    let secondChecked = '0';
+    let SecondRadiochecked = 1;
+    if (second === '*') {
+      SecondRadiochecked = 1;
+    } else if (second.indexOf('-') > -1) {
+      SecondRadiochecked = 2;
+      [secondCycleStart, secondCycleEnd] = second.split('-');
+    } else if (second.indexOf('/') > -1) {
+      SecondRadiochecked = 3;
+      [secondStart, secondEvery] = second.split('/');
+    } else {
+      SecondRadiochecked = 4;
+      secondChecked = second;
+    }
     // 分
     const minute = cronArr[0];
     let minuteCycleStart = 1;
@@ -174,7 +173,7 @@ class CRON extends React.Component {
     }
 
     this.state = {
-      // secondVal: second, // 秒
+      secondVal: second, // 秒
       minVal: minute, // 分
       hourVal: hour, // 时
       dayOfMonVal: day, // 天
@@ -723,7 +722,8 @@ class CRON extends React.Component {
       TabsActiveKey,
       type,
     } = this.state;
-    const { style={ width: 576 }, className, lang="zh_CN"  } = this.props;
+    const { style={ width: 576, height: 500 }, className, lang="zh_CN"  } = this.props;
+    console.log(style,'style')
     const i18n = getI18n(lang); // 国际化
     const Cls = classnames('cron', className);
 
@@ -873,5 +873,5 @@ class CRON extends React.Component {
   }
 }
 
-export default CRON;
+export default Cron;
 
